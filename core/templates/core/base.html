@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Car Parts Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <!-- Top Left (Contacts) -->
+        <div class="left">
+            <div class="contacts-container">
+                <p><i class="fas fa-phone-alt"></i> +254-748-065-379</p>
+                <p><i class="fas fa-envelope"></i> berlin_imports@gmail.com</p>
+            </div>
+
+            <nav class="nav-bar">
+                <a href="#">Home</a>
+                <a href="#">Cars</a>
+                <a href="#">Bikes</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Logo Centered -->
+
+        <div class="centre">
+            <div class="logo-center">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo">
+                </a>
+            </div>
+         </div>
+
+    </div>
+         
+         <!-- right side div -->
+          
+         <div class="right-container">
+
+            <div class="star-rating">
+                <span class="star filled">&#9733;</span>
+                <span class="star filled">&#9733;</span>
+                <span class="star filled">&#9733;</span>
+                <span class="star filled">&#9733;</span>
+                <span class="star filled">&#9733;</span> 
+                <span class="rating-text">(5.0)</span> <!-- Optional rating text -->
+            </div>
+
+
+            <div class="right">
+                <div class="top">
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>       
+                </div>
+    
+                <div class="bottom">
+                    <div class="auth-container">
+                        {% if user.is_authenticated %}
+                            <p>Welcome, {{ user.username }}!</p>
+                            <a href="{% url 'logout' %}">Logout</a>
+                            <p>Go to admin page</p>
+                            <a href="{% url 'admin:index' %}">Admin</a>
+                        {% else %}
+                            <a href="{% url 'login' %}">Login</a>
+                            <a href="{% url 'signup' %}">Signup</a>
+                        {% endif %}
+                    </div>
+                </div>  
+
+            </div>
+         </div>
+        
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>About Us</h3>
+                <p>We specialize in high-quality car spare parts for brands like VW, Audi, Mercedes, and Mazda. Your satisfaction is our priority!</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> Tiktok</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Car Spare Parts | All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

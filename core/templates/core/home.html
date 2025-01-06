@@ -1,0 +1,296 @@
+<!-- templates/home.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block title %}Home | Berlin Imports Ltd{% endblock %}
+
+{% block content %}
+<section class="search-section">
+    <div class="text-section">
+        <div class="background-image"></div>
+        <div class="text-content">
+            <h2 class="dynamic-text">Your Trusted Source for Car Parts in Nairobi</h2>
+            <h2 class="dynamic-text">Quality Products with Worldwide Delivery</h2>
+            <h2 class="dynamic-text">Unbeatable Prices for Exceptional Service</h2>
+        </div>
+    </div>
+    
+
+    <div class="background-image"></div>
+<div class="text-content">
+    <h2 class="dynamic-text">Your Trusted Source for Car Parts in Nairobi</h2>
+    <h2 class="dynamic-text">Quality Products with Worldwide Delivery</h2>
+    <h2 class="dynamic-text">Unbeatable Prices for Exceptional Service</h2>
+</div>
+
+<form method="post" action="{% url 'product_detail' %}" class="search-design-container">
+    {% csrf_token %}
+    <label for="id_brand">Brand:</label>
+    <select id="id_brand" name="brand">
+        <option value="">Select a brand</option>
+        {% for brand in form.fields.brand.queryset %}
+            <option value="{{ brand.id }}">{{ brand.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="id_model">Model:</label>
+    <select id="id_model" name="model" disabled>
+        <option value="">Select a model</option>
+        {% for model in form.fields.model.queryset %}
+            <option value="{{ model.id }}" data-brand="{{ model.make.id }}">{{ model.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="id_year">Year:</label>
+    <select id="id_year" name="year" disabled>
+        <option value="">Select a year</option>
+        {% for year in form.fields.year.choices %}
+            <option value="{{ year.0 }}">{{ year.1 }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+
+<script>
+    document.getElementById('id_brand').addEventListener('change', function() {
+        const brandId = this.value;
+        const modelSelect = document.getElementById('id_model');
+        const yearSelect = document.getElementById('id_year');
+        
+        if (brandId) {
+            modelSelect.disabled = false;
+            const models = modelSelect.querySelectorAll('option[data-brand]');
+            models.forEach(model => {
+                if (model.getAttribute('data-brand') === brandId) {
+                    model.style.display = 'block';
+                } else {
+                    model.style.display = 'none';
+                }
+            });
+        } else {
+            modelSelect.disabled = true;
+            modelSelect.value = '';
+        }
+        
+        yearSelect.disabled = true;
+        yearSelect.value = '';
+    });
+
+    document.getElementById('id_model').addEventListener('change', function() {
+        const yearSelect = document.getElementById('id_year');
+        yearSelect.disabled = !this.value;
+    });
+</script>
+
+    <div class="contact-section">
+        <p class="contact-title">Berlin Imports :</p>
+        <p class="contact-message">Contact us now!</p>
+        <a href="#" class="contact-link">Click here</a>
+    </div>
+    
+    
+
+    <!-- <div class="contacts-section">
+        this is the contacts
+    </div> -->
+</section>
+<!-- <section class="car-logos">
+    <h1 class="logos-h1">Search by brand for car parts:</h1>
+    <div class="logo-container">
+        <div class="logo">
+            <a href="audi" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM (1).jpeg' %}" alt="Audi Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="bmw" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM.jpeg' %}" alt="BMW Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#landrover" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (1).jpeg' %}" alt="Land Rover Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#porsche" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (2).jpeg' %}" alt="Porsche Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Toyota" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (3).jpeg' %}" alt="Toyota Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Golf" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (4).jpeg' %}" alt="Golf Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#benz" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM.jpeg' %}" alt="Benz Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="audi" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM (1).jpeg' %}" alt="Audi Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="bmw" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM.jpeg' %}" alt="BMW Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#landrover" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (1).jpeg' %}" alt="Land Rover Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#porsche" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (2).jpeg' %}" alt="Porsche Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Toyota" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (3).jpeg' %}" alt="Toyota Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Golf" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (4).jpeg' %}" alt="Golf Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#benz" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM.jpeg' %}" alt="Benz Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="audi" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM (1).jpeg' %}" alt="Audi Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="bmw" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM.jpeg' %}" alt="BMW Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#landrover" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (1).jpeg' %}" alt="Land Rover Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#porsche" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (2).jpeg' %}" alt="Porsche Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Toyota" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (3).jpeg' %}" alt="Toyota Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Golf" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (4).jpeg' %}" alt="Golf Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#benz" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM.jpeg' %}" alt="Benz Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="audi" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM (1).jpeg' %}" alt="Audi Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="bmw" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.22 PM.jpeg' %}" alt="BMW Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#landrover" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (1).jpeg' %}" alt="Land Rover Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#porsche" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (2).jpeg' %}" alt="Porsche Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Toyota" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (3).jpeg' %}" alt="Toyota Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#Golf" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM (4).jpeg' %}" alt="Golf Logo">
+            </a>
+        </div>
+        <div class="logo">
+            <a href="#benz" target="_blank">
+                <img src="{% static 'images/WhatsApp Image 2024-10-11 at 6.32.23 PM.jpeg' %}" alt="Benz Logo">
+            </a>
+        </div>
+    
+
+    </div>
+</section> -->
+
+<section class="latest-products">
+    <!-- <h2>Our Latest Products</h2>
+    <div class="products-container">
+        {% for part in recent_parts %}
+            <div class="product-card">
+                <h3>{{ part.name }}</h3>
+                <p>For: <strong>{{ part.car_model }}</strong></p>
+                <p>Price: <span class="price">{{ part.price }} dirhams</span></p>
+                <p>Available: {{ part.available_quantity }}</p>
+                <img src="{{ part.image.url }}" alt="{{ part.name }}" style="width: 200px; height: auto;">
+                <p class="added-on">Added on: {{ part.created_at|date:"F j, Y, g:i a" }}</p>
+            </div>
+        {% empty %}
+            <p>No recent parts available.</p>
+        {% endfor %}
+    </div> -->
+</section>
+
+
+
+<section class="product-item">
+    <h2>This are the product items</h2>
+    <div class="product-container">
+        {% for part in recent_parts %}
+        <div class="product-card">
+            <p>item: <strong>{{ part.name }}</strong></p>
+            <p>Car Model: <strong>{{ part.car_model }}</strong></p>
+            <p>Year: <strong>{{ part.year }}</strong></p>
+            <p>Engine Code: <strong>{{ part.engine_code }}</strong></p>
+            <p>Engine Capacity: <strong>{{ part.engine_capacity }} cc</strong></p>
+            <p>Condition: <strong>{{ part.condition }}</strong></p>
+    
+            <!-- Display the first image or a placeholder if no images exist -->
+            {% with part.images.first as first_image %}
+                {% if first_image %}
+                    <img src="{{ first_image.image.url }}" alt="{{ part.name }}" class="product-image" style="width: 200px; height: auto; border-radius: 8px;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% empty %}
+        <p>No recent parts available.</p>
+        {% endfor %}
+    </div>
+    
+</section>
+
+
+{% endblock %}
