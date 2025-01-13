@@ -16,7 +16,7 @@ def home(request):
             brand = form.cleaned_data['brand']
             model = form.cleaned_data['model']
             year = form.cleaned_data['year']
-            return redirect("core/product_detail.html")
+            return redirect("home")
     else:
         form = SearchForm()
         parts = Part.objects.all().order_by('-created_at')[:8]
@@ -41,10 +41,6 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
-
-def product_detail(request):
-      # Fetch the product or return 404
-    return render(request, 'core/product_detail.html', {'product': product})
 
 
 

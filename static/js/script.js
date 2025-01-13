@@ -14,7 +14,8 @@ function filterModels() {
 
 
 
-const texts = document.querySelectorAll('.dynamic-text');
+const texts = document.querySelectorAll('.text-content');
+console.log(texts)
 const searchSection = document.querySelector('.search-section');
 
 // Array of images

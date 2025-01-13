@@ -24,7 +24,7 @@
     <h2 class="dynamic-text">Unbeatable Prices for Exceptional Service</h2>
 </div>
 
-<form method="post" action="{% url 'product_detail' %}" class="search-design-container">
+<form method="post" class="search-design-container">
     {% csrf_token %}
     <label for="id_brand">Brand:</label>
     <select id="id_brand" name="brand">

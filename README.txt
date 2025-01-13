@@ -1,7 +1,7 @@
 Define urls needed:
 - home/ or /
 - latest_prodcuts/
-- product_detail/
+- product_detail/int pk
 - about
 - contact
 - login
@@ -24,7 +24,7 @@ The *.html files are:
 -base.html
 -home.html
 -latest_prodcuts.html
--product_detail.html
+-product_detail.html (recieve the pk for the product)
 -login.html
 -logout.html
 -signup.html
